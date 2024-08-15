@@ -35,10 +35,12 @@ public class RangeTest {
 
     @Test
     void iteratorTest() {
-        Range rangeIt = Range.getRange(0, 2);
+        Range rangeIt = Range.getRange(0, 5);
+        rangeIt.setPredicate((i) -> i % 2 == 0);
+    
         Iterator<Integer> it = rangeIt.iterator();
-        Integer[] expected = { 0, 1, 2 };
-        Integer[] actual = new Integer[expected.length];
+        Integer[] expected = { 0, 2, 4 };
+        Integer[] actual = new Integer[expected.length];;
 
         int index = 0;
         while (it.hasNext()) {
@@ -48,4 +50,5 @@ public class RangeTest {
         assertArrayEquals(expected, actual);
         assertThrows(NoSuchElementException.class, it::next);
     }
+
 }
