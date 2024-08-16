@@ -46,7 +46,7 @@ public class Range implements Iterable<Integer> {
     }
 
     private class RangeIterator implements Iterator<Integer> {
-        int current = getNext(min);
+        private Integer current = getNext(min);
 
         private Integer getNext(int value) {
             Integer result = null;
@@ -63,7 +63,7 @@ public class Range implements Iterable<Integer> {
 
         @Override
         public boolean hasNext() {
-            return getNext(current) != null;
+            return current != null;
         }
 
         @Override
@@ -72,9 +72,9 @@ public class Range implements Iterable<Integer> {
                 throw new NoSuchElementException();
             }
 
-            Integer next = getNext(current);
-            current = next + 1;
-            return next;
+            Integer tmp = current;
+            current = getNext(++current);
+            return tmp;
         }
     }
 }
